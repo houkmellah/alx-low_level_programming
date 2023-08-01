@@ -1,0 +1,27 @@
+#include "main.h"
+#include <stdio.h>
+/**
+ * print_diagsums - Calculate and print the sum of diagonals in a square matrix
+ * @a: The input array representing the square matrix.
+ * @size: The size of the square matrix (number of rows/columns).
+ *
+ * Return: void (no return value).
+ */
+void print_diagsums(int *a, int size)
+{
+int diagonal_sum_1 = 0;
+int diagonal_sum_2 = 0;
+int index;
+
+for (index = 0; index < size; index++)
+{
+diagonal_sum_1 += a[index * size + index];
+}
+
+for (index = size - 1; index >= 0; index--)
+{
+diagonal_sum_2 += a[index * size + (size - index - 1)];
+}
+
+printf("%d, %d\n", diagonal_sum_1, diagonal_sum_2);
+}
