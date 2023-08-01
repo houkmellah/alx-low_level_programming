@@ -1,12 +1,11 @@
 #include "main.h"
 /**
- * _strspn - Calculates the length of the initial segment of 's' that consists
- *           of characters present in 'accept'.
- * @s: The input string to be checked.
- * @accept: The set of characters to compare against.
- *
- * Return: The length of the initial segment of 's' containing 'accept' characters.
- */
+*_strspn - Calculates the length of the initial segment of 's'
+* @s: The input string to be checked.
+* @accept: The set of characters to compare against.
+*
+* Return: The length of the initial segment of 's' containing 'accept'
+*/
 unsigned int _strspn(char *s, char *accept)
 {
 	unsigned int length = 0;
