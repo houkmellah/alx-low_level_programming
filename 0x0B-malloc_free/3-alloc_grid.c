@@ -6,7 +6,7 @@
  * @width: Width input.
  * @height: Height input.
  *
- * Return: Pointer to the 2D array, or NULL if allocation fails or inputs are invalid.
+ * Return: Pointer to the 2D array, or NULL if alloc fails or inp are invalid.
  */
 int **alloc_grid(int width, int height)
 {
