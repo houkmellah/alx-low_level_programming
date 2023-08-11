@@ -2,38 +2,28 @@
 #include "main.h"
 
 /**
-* *_memset - fills memory with a constant byte
-* @memArea: area to fill
-* @value: value to set
-* @count: times to set value
-*
-* Return: pointer to the filled area
-*/
-char *_memset(char *memArea, char value, unsigned int count)
+ * *array_range - creates an array of integers
+ * @start: start of integer range
+ * @end: end of integer range
+ * Return: pointer to the new array
+ */
+int *array_range(int start, int end)
 {
-unsigned int index;
-for (index = 0; index < count; index++)
-{
-memArea[index] = value;
-}
-return (memArea);
-}
+int *intArray;
+int index, arraySize;
 
-/**
-* *_calloc - allocates memory for an array
-* @numElem: number of array elements
-* @elemSize: size of each element
-*
-* Return: pointer to allocated memory
-*/
-void *_calloc(unsigned int numElem, unsigned int elemSize)
-{
-char *allocatedMem;
-if (numElem == 0 || elemSize == 0)
-return (NULL);
-allocatedMem = malloc(elemSize * numElem);
-if (allocatedMem == NULL)
-return (NULL);
-_memset(allocatedMem, 0, numElem * elemSize);
-return (allocatedMem);
+if (start > end)
+    return (NULL);
+
+arraySize = end - start + 1;
+
+intArray = malloc(sizeof(int) * arraySize);
+
+if (!intArray)
+    return (NULL);
+
+for (index = 0; start <= end; index++)
+    intArray[index] = start++;
+
+return (intArray);
 }
