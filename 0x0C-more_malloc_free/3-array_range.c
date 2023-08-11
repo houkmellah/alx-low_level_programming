@@ -13,17 +13,17 @@ int *intArray;
 int index, arraySize;
 
 if (start > end)
-    return (NULL);
+return (NULL);
 
 arraySize = end - start + 1;
 
 intArray = malloc(sizeof(int) * arraySize);
 
 if (!intArray)
-    return (NULL);
+return (NULL);
 
-for (index = 0; start <= end; index++)
-    intArray[index] = start++;
+for (index = 0 ; start <= end ; index++)
+intArray[index] = start++;
 
 return (intArray);
 }
