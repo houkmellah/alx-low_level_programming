@@ -10,35 +10,35 @@
  *
  * Return: Always 0.
  */
-int main(int __attribute__((__unused__)) arg_count, char *arg_values[])
+int main(int __attribute__((__unused__)) argc, char *argv[])
 {
-int first_number, second_number;
-char *operator_sign;
+	int num1, num2;
+	char *op;
 
-if (arg_count != 4)
-{
-printf("Error\n");
-exit(98);
-}
+	if (argc != 4)
+	{
+		printf("Error\n");
+		exit(98);
+	}
 
-first_number = atoi(arg_values[1]);
-operator_sign = arg_values[2];
-second_number = atoi(arg_values[3]);
+	num1 = atoi(argv[1]);
+	op = argv[2];
+	num2 = atoi(argv[3]);
 
-if (get_op_func(operator_sign) == NULL || operator_sign[1] != '\0')
-{
-printf("Error\n");
-exit(99);
-}
+	if (get_op_func(op) == NULL || op[1] != '\0')
+	{
+		printf("Error\n");
+		exit(99);
+	}
 
-if ((*operator_sign == '/' && second_number == 0) ||
-(*operator_sign == '%' && second_number == 0))
-{
-printf("Error\n");
-exit(100);
-}
+	if ((*op == '/' && num2 == 0) ||
+	    (*op == '%' && num2 == 0))
+	{
+		printf("Error\n");
+		exit(100);
+	}
 
-printf("%d\n", get_op_func(operator_sign)(first_number, second_number));
+	printf("%d\n", get_op_func(op)(num1, num2));
 
-return (0);
+	return (0);
 }
