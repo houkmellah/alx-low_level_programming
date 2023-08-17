@@ -1,22 +1,21 @@
 #ifndef CALC_H
 #define CALC_H
-
 /**
-* struct op - A data structure.
-* @operator: The operator.
-* @func: The function linked to the operator.
-*/
+ * struct op - A struct op.
+ * @op: The operator.
+ * @f: The associated function.
+ */
 typedef struct op
 {
-char *operator;
-int (*func)(int x, int y);
+	char *op;
+	int (*f)(int a, int b);
 } op_t;
 
-int op_add(int x, int y);
-int op_sub(int x, int y);
-int op_mul(int x, int y);
-int op_div(int x, int y);
-int op_mod(int x, int y);
-int (*get_op_func(char *symbol))(int, int);
+int op_add(int a, int b);
+int op_sub(int a, int b);
+int op_mul(int a, int b);
+int op_div(int a, int b);
+int op_mod(int a, int b);
+int (*get_op_func(char *s))(int, int);
 
 #endif
