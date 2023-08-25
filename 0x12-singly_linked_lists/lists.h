@@ -1,6 +1,15 @@
 #ifndef LISTS_H
 #define LISTS_H
 
+/**
+* struct list_s - Represents a node in a singly linked list.
+* @str: A dynamically allocated string.
+* @len: The length of the string.
+* @next: Pointer to the subsequent node.
+*
+* Overview: This structure defines a node for a singly linked list,
+* intended for use in a Holberton project.
+*/
 typedef struct list_s
 {
 	char *str;
