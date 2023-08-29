@@ -5,8 +5,8 @@ size_t looped_listint_len(const listint_t *head);
 size_t print_listint_safe(const listint_t *head);
 
 /**
- * looped_listint_len - Determines the number of distinct nodes 
- *                      in a possibly circular listint_t linked list.
+ * looped_listint_len - Determines the number of distinct nodes
+*                      in a possibly circular listint_t linked list.
  * @head: The starting node of the listint_t list.
  *
  * Return: If there's no loop, returns 0.
