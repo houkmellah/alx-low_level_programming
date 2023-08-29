@@ -1,17 +1,17 @@
 #include "lists.h"
 #include <stdio.h>
 
-size_t measure_loop_length(const listint_t *head);
-size_t print_list_safe(const listint_t *head);
+size_t looped_listint_len(const listint_t *head);
+size_t  print_listint_safe(const listint_t *head);
 
 /**
-* measure_loop_length - Measures unique nodes in a looped linked list.
+* looped_listint_len - Measures unique nodes in a looped linked list.
 * @head: Reference to the start of the linked list.
 *
 * Return: If the list isn't looped - 0.
 * Otherwise - the number of unique nodes in the list.
 */
-size_t measure_loop_length(const listint_t *head)
+size_t looped_listint_len(const listint_t *head)
 {
 const listint_t *slow_ptr, *fast_ptr;
 size_t node_count = 1;
@@ -57,7 +57,7 @@ return (0);
 *
 * Return: The number of nodes in the list.
 */
-size_t print_list_safe(const listint_t *head)
+size_t  print_listint_safe(const listint_t *head)
 {
 size_t nodes, i = 0;
 

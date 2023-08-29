@@ -6,35 +6,35 @@
  *
  * Return: Number of nodes in the freed list.
  */
-size_t free_list_safe(listint_t **head)
+size_t free_list_safe(listint_t **h)
 {
     size_t node_count = 0;
     int offset;
     listint_t *next_node;
 
-    if (!head || !*head)
+    if (!h || !*h)
         return (0);
 
-    while (*head)
+    while (*h)
     {
-        offset = *head - (*head)->next;
+        offset = *h - (*h)->next;
         if (offset > 0)
         {
-            next_node = (*head)->next;
-            free(*head);
-            *head = next_node;
+            next_node = (*)->next;
+            free(*h);
+            *h = next_node;
             node_count++;
         }
         else
         {
-            free(*head);
-            *head = NULL;
+            free(*h);
+            *h = NULL;
             node_count++;
             break;
         }
     }
 
-    *head = NULL;
+    *h = NULL;
 
     return (node_count);
 }
