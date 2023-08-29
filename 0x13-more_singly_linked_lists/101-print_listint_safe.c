@@ -2,15 +2,16 @@
 #include <stdio.h>
 
 size_t looped_listint_len(const listint_t *head);
-size_t  print_listint_safe(const listint_t *head);
+size_t print_listint_safe(const listint_t *head);
 
 /**
-* looped_listint_len - Measures unique nodes in a looped linked list.
-* @head: Reference to the start of the linked list.
-*
-* Return: If the list isn't looped - 0.
-* Otherwise - the number of unique nodes in the list.
-*/
+ * looped_listint_len - Determines the number of distinct nodes 
+ *                      in a possibly circular listint_t linked list.
+ * @head: The starting node of the listint_t list.
+ *
+ * Return: If there's no loop, returns 0.
+ *         Otherwise, returns the count of distinct nodes in the loop.
+ */
 size_t looped_listint_len(const listint_t *head)
 {
 const listint_t *slow_ptr, *fast_ptr;
@@ -52,28 +53,29 @@ return (0);
 }
 
 /**
-* print_list_safe - Safely prints a linked list.
-* @head: Reference to the start of the linked list.
-*
-* Return: The number of nodes in the list.
-*/
-size_t  print_listint_safe(const listint_t *head)
+ * print_listint_safe - Safely prints the nodes of a listint_t list.
+ * @head: The first node of the listint_t list.
+ *
+ * Return: The total number of nodes in the list.
+ */
+size_t print_listint_safe(const listint_t *head)
 {
-size_t nodes, i = 0;
+size_t total_nodes, current_index = 0;
 
-nodes = measure_loop_length(head);
+total_nodes = looped_listint_len(head);
 
-if (nodes == 0)
+if (total_nodes == 0)
 {
-for (; head != NULL; nodes++)
+for (; head != NULL; total_nodes++)
 {
 printf("[%p] %d\n", (void *)head, head->n);
 head = head->next;
 }
 }
+
 else
 {
-for (i = 0; i < nodes; i++)
+for (current_index = 0; current_index < total_nodes; current_index++)
 {
 printf("[%p] %d\n", (void *)head, head->n);
 head = head->next;
@@ -82,5 +84,5 @@ head = head->next;
 printf("-> [%p] %d\n", (void *)head, head->n);
 }
 
-return (nodes);
+return (total_nodes);
 }
