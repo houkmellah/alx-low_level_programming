@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
-* free_listint2 - releases a singly linked list from memory and sets head to NULL
+* free_listint2 - releases a singly link list from memory and sets head to NULL
 * @head: reference to the listint_t list to be released
 */
 void free_listint2(listint_t **head)
