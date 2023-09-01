@@ -1,12 +1,14 @@
 #include "main.h"
 /**
-* clear_bit - Sets bit at index to 0.
-* @n: Pointer to target number.
-* @index: Index of bit to clear.
-* Return: 1 if successful, -1 otherwise.
-*/
-int clear_bit(unsigned long int *num, unsigned int idx){
-if(idx>63)return(-1);
-*num=(~(1UL<<idx)&*num);
-return(1);
+ * clear_bit - Sets a specified bit to 0 in a number.
+ * @n: Pointer to the number.
+ * @index: Index of bit to clear.
+ * Return: 1 if successful, -1 otherwise.
+ */
+int clear_bit(unsigned long int *n, unsigned int index)
+{
+if (index > 63)
+return (-1);
+*n = (~(1UL << index) & *n);
+return (1);
 }
