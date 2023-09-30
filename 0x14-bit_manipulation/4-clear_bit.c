@@ -1,17 +1,17 @@
 #include "main.h"
 
 /**
- * reset_bit - changes a bit at a specified position to 0
- * @number: pointer to the number to be modified
- * @position: position of the bit to be reset
+ * clear_bit - changes a bit at a specified position to 0
+ * @n: pointer to the number to be modified
+ * @index: position of the bit to be reset
  *
  * Return: 1 if successful, -1 if unsuccessful
  */
-int reset_bit(unsigned long int *number, unsigned int position)
+int clear_bit(unsigned long int *n, unsigned int index)
 {
-if (position > 63)
+if (index > 63)
 return (-1);
 
-*number = (~(1UL << position) & *number);
+*n = (~(1UL << index) & *n);
 return (1);
 }

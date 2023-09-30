@@ -4,7 +4,7 @@
  * display_binary - displays the binary representation of a decimal number
  * @value: number to be displayed in binary
  */
-void display_binary(unsigned long int value)
+void print_binary(unsigned long int value)
 {
 int position, counter = 0;
 unsigned long int currentBit;
