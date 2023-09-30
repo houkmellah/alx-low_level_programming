@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-* flip_bits - determines the number of bits needed to modify  
+* flip_bits - determines the number of bits needed to modify
 * to transform one number into another
 * @n: initial number
 * @m: target number

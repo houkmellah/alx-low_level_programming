@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * display_binary - displays the binary representation of a decimal number
+ * print_binary - displays the binary representation of a decimal number
  * @n: number to be displayed in binary
  */
 void print_binary(unsigned long int n)
