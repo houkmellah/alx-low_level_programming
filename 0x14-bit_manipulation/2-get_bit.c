@@ -2,8 +2,8 @@
 
 /**
  * get_bit - retrieves the value of a bit at a specific pos in a dec num
- * @number: number under examination
- * @position: position of the desired bit
+ * @n: number under examination
+ * @index: position of the desired bit
  *
  * Return: the value of the targeted bit
  */

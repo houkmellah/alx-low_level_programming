@@ -2,16 +2,16 @@
 
 /**
  * display_binary - displays the binary representation of a decimal number
- * @value: number to be displayed in binary
+ * @n: number to be displayed in binary
  */
-void print_binary(unsigned long int value)
+void print_binary(unsigned long int n)
 {
 int position, counter = 0;
 unsigned long int currentBit;
 
 for (position = 63; position >= 0; position--)
 {
-currentBit = value >> position;
+currentBit = n >> position;
 
 if (currentBit & 1)
 {

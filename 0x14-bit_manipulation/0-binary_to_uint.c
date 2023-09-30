@@ -2,7 +2,7 @@
 
 /**
  * binary_to_uint - transforme un nombre binaire en unsigned int
- * @binary: chaîne contenant le nombre binaire
+ * @b: chaîne contenant le nombre binaire
  *
  * Return: le nombre converti
  */
