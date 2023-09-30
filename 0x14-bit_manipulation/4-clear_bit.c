@@ -10,7 +10,7 @@
 int reset_bit(unsigned long int *number, unsigned int position)
 {
 if (position > 63)
-    return (-1);
+return (-1);
 
 *number = (~(1UL << position) & *number);
 return (1);
