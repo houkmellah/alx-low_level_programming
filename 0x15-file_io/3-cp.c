@@ -2,93 +2,102 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *allocate_buffer(char *filename);
-void shut_file(int file_desc);
+char *create_buffer(char *file);
+void close_file(int fd);
 
 /**
- * allocate_buffer - Assigns memory for a buffer of size 1024 bytes.
- * @filename: Name of the file the buffer is associated with.
+ * create_buffer - Allocates 1024 bytes for a buffer.
+ * @file: The name of the file buffer is storing chars for.
  *
- * Return: Pointer to the allocated buffer.
+ * Return: A pointer to the newly-allocated buffer.
  */
-char *allocate_buffer(char *filename)
+char *create_buffer(char *file)
 {
-char *buf;
-buf = malloc(sizeof(char) * 1024);
-if (!buf)
-{
-dprintf(STDERR_FILENO, "Error: Cannot write to %s\n", filename);
-exit(99);
-}
-return (buf);
+	char *buffer;
+
+	buffer = malloc(sizeof(char) * 1024);
+
+	if (buffer == NULL)
+	{
+		dprintf(STDERR_FILENO,
+			"Error: Can't write to %s\n", file);
+		exit(99);
+	}
+
+	return (buffer);
 }
 
 /**
- * shut_file - Safely closes the file descriptor.
- * @file_desc: File descriptor to close.
+ * close_file - Closes file descriptors.
+ * @fd: The file descriptor to be closed.
  */
-void shut_file(int file_desc)
+void close_file(int fd)
 {
-if (close(file_desc) == -1)
-{
-dprintf(STDERR_FILENO, "Error: Cannot close fd %d\n", file_desc);
-exit(100);
-}
+	int c;
+
+	c = close(fd);
+
+	if (c == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+		exit(100);
+	}
 }
 
 /**
- * main - Duplicates content from one file to another.
- * @argc: Argument count.
- * @argv: Argument values.
+ * main - Copies the contents of a file to another file.
+ * @argc: The number of arguments supplied to the program.
+ * @argv: An array of pointers to the arguments.
  *
- * Return: 0 if successful.
+ * Return: 0 on success.
  *
- * Errors: 97 for incorrect argument count.
- *         98 if source file doesn't exist or can't be read.
- *         99 if target file can't be created or written to.
- *         100 if either file can't be closed.
+ * Description: If the argument count is incorrect - exit code 97.
+ * If file_from does not exist or cannot be read - exit code 98.
+ * If file_to cannot be created or written to - exit code 99.
+ * If file_to or file_from cannot be closed - exit code 100.
  */
 int main(int argc, char *argv[])
 {
-int src, dest, bytesRead, bytesWritten;
-char *buf;
+	int from, to, r, w;
+	char *buffer;
 
-if (argc != 3)
-{
-dprintf(STDERR_FILENO, "Usage: cp source destination\n");
-exit(97);
-}
+	if (argc != 3)
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
+	}
 
-buf = allocate_buffer(argv[2]);
-src = open(argv[1], O_RDONLY);
-bytesRead = read(src, buf, 1024);
-dest = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	buffer = create_buffer(argv[2]);
+	from = open(argv[1], O_RDONLY);
+	r = read(from, buffer, 1024);
+	to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
 
-do 
-{
-if (src == -1 || bytesRead == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't read from %s\n", argv[1]);
-free(buf);
-exit(98);
-}
+	do {
+		if (from == -1 || r == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't read from file %s\n", argv[1]);
+			free(buffer);
+			exit(98);
+		}
 
-bytesWritten = write(dest, buf, bytesRead);
-if (dest == -1 || bytesWritten == -1)
-{
-dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-free(buf);
-exit(99);
-}
+		w = write(to, buffer, r);
+		if (to == -1 || w == -1)
+		{
+			dprintf(STDERR_FILENO,
+				"Error: Can't write to %s\n", argv[2]);
+			free(buffer);
+			exit(99);
+		}
 
-bytesRead = read(src, buf, 1024);
-dest = open(argv[2], O_WRONLY | O_APPEND);
+		r = read(from, buffer, 1024);
+		to = open(argv[2], O_WRONLY | O_APPEND);
 
-} while (bytesRead > 0);
+	} while (r > 0);
 
-free(buf);
-shut_file(src);
-shut_file(dest);
+	free(buffer);
+	close_file(from);
+	close_file(to);
 
-return (0);
+	return (0);
 }
