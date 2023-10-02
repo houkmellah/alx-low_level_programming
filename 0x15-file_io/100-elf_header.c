@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+
 void verify_elf(unsigned char *id);
 void display_magic(unsigned char *id);
 void display_class(unsigned char *id);
