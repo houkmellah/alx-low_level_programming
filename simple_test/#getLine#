@@ -1,0 +1,60 @@
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MY_GETLINE_BUFSIZE 1024
+
+ssize_t my_getline(char **lineptr, size_t *n, FILE *stream) {
+    static char buffer[MY_GETLINE_BUFSIZE];
+    static char *buffer_ptr = buffer;
+    static ssize_t bytes_in_buffer = 0;
+
+    if (lineptr == NULL || n == NULL) {
+        return -1;
+    }
+
+    if (*lineptr == NULL || *n == 0) {
+        *n = MY_GETLINE_BUFSIZE;
+        *lineptr = malloc(*n);
+        if (*lineptr == NULL) {
+            return -1;
+        }
+    }
+
+    char *current_ptr = *lineptr;
+    size_t idx = 0;
+
+    while (1) {
+        if (bytes_in_buffer <= 0) {
+            bytes_in_buffer = read(fileno(stream), buffer, sizeof(buffer));
+            buffer_ptr = buffer;
+            if (bytes_in_buffer == 0) {
+                if (idx == 0) return -1; // EOF reached without any input
+                break;
+            } else if (bytes_in_buffer < 0) {
+                return -1; // Read error
+            }
+        }
+
+        while (bytes_in_buffer > 0 && idx < *n - 1) {
+            bytes_in_buffer--;
+            current_ptr[idx++] = *buffer_ptr++;
+            if (current_ptr[idx - 1] == '\n') {
+                current_ptr[idx] = '\0';
+                return idx;
+            }
+        }
+
+        if (idx == *n - 1) {
+            *n += MY_GETLINE_BUFSIZE;
+            char *new_ptr = realloc(*lineptr, *n);
+            if (new_ptr == NULL) {
+                return -1;
+            }
+            *lineptr = new_ptr;
+            current_ptr = *lineptr + idx;
+        }
+    }
+    current_ptr[idx] = '\0';
+    return idx;
+}

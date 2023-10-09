@@ -1,0 +1,78 @@
+
+#ifndef _SHELL_H_
+#define _SHELL_H_
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
+#include <limits.h>
+#include <fcntl.h>
+#include <errno.h>
+
+/* Tailles des tampons pour la lecture/écriture */
+#define READ_BUF_SIZE 1024
+#define WRITE_BUF_SIZE 1024
+#define BUF_FLUSH -1
+
+/* Définitions pour la gestion des commandes */
+#define CMD_NORM	0
+#define CMD_OR		1
+#define CMD_AND		2
+#define CMD_CHAIN	3
+
+/* Définitions pour convert_number() */
+#define CONVERT_LOWERCASE	1
+#define CONVERT_UNSIGNED	2
+#define INFO_INIT {NULL, NULL, NULL, 0, 0, NULL}
+#define EXIT_SHELL 1
+
+
+/* Variables globales */
+extern char **environ;
+
+
+
+/* Structure pour stocker les informations sur une commande */
+typedef struct {
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
+	char *fname;
+	int status;
+	int cmd_buf_type; /* CMD_type ||, &&, ; */
+} info_t;
+
+/* Fonctions principales */
+int execute_command(info_t *info, char *cmd, char **args);
+int handle_builtin_commands(info_t *info);
+int process_command(info_t *info);
+
+/* Fonctions utilitaires */
+int _strlen(char *s);
+int _strcmp(char *s1, char *s2);
+char *starts_with(const char *haystack, const char *needle);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
+char *_strdup(const char *str);
+void _puts(char *str);
+int _putchar(char c);
+
+char **split_string(char *str, char *delim);
+void free_string_array(char **array);
+int is_builtin(char *command);
+int execute_builtin(info_t *info, char **args);
+char *resolve_command_path(char *command);
+void shell_loop(info_t *info);
+s_sizet my_getline(&line, &len, stdin);
+
+/* ... Ajoutez d'autres déclarations de fonctions ici ... */
+
+#endif /* _SHELL_H_ */
