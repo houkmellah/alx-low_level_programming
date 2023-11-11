@@ -21,7 +21,7 @@ index--;
 }
 
 if (current_node == NULL)
-return -1;
+return (-1);
 
 if (current_node == *head)
 {
@@ -39,5 +39,5 @@ current_node->prev->next = current_node->next;
 }
 
 free(current_node);
-return 1;
+return (1);
 }

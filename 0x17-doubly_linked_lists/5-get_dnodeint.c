@@ -14,9 +14,9 @@ unsigned int currentIndex = 0;
 while (head)
 {
 if (currentIndex == index)
-return head;
+return (head);
 head = head->next;
 currentIndex++;
 }
-return NULL;
+return (NULL);
 }

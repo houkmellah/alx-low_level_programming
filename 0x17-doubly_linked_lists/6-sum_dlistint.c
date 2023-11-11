@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * sum_dlistint - Calculates the sum of all data (integers) in a doubly linked list.
+ * sum_dlistint - Calculates the sum of all data  in a doubly linked list.
  * @head: Pointer to the head node of the list.
  *
  * Return: The sum of all integer data in the list.
